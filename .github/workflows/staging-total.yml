@@ -1,0 +1,33 @@
+name: Total-Staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+    steps:
+    - name: Checkout theme repo
+      uses: actions/checkout@main
+      with:
+          repository: Aspose/tutorials.aspose.com
+          token: ${{ secrets.REPO_TOKEN }}
+          fetch-depth: 0 
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2.4.13
+      with:
+          hugo-version: '0.101.0'
+          extended: true
+    - name: Install autoprefixer
+      run:  npm install -D --save autoprefixer
+    - name: Install postcss-cli
+      run:  npm install -D --save postcss-cli
+    - name: Find and replace domain name
+      run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/tutorials.aspose.com/products-qa.aspose.com/g {} +
+    - name: Build Total
+      run: hugo --config "configs/total.toml" -c "content/total" -b "https://products-qa.aspose.com/total" --cleanDestinationDir --minify --templateMetrics --templateMetricsHints
+    - name: Deploy Total to S3
+      run: hugo deploy --config "configs/total.toml" --maxDeletes=-1 --target "staging"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
