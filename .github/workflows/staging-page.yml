@@ -34,7 +34,7 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@v2
       with:
         find: "tutorials.aspose.com"
-        replace: "products-qa.aspose.com"
+        replace: "tutorials2.aspose.com"
         include: "_index.md"
     - name: Find and replace image url domain
       uses: jacobtomlinson/gha-find-replace@v2
@@ -43,7 +43,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build Page
-      run: hugo --config "configs/page.toml" -c "content/page" -b "https://products-qa.aspose.com/page" --cleanDestinationDir --minify
+      run: hugo --config "configs/page.toml" -c "content/page" -b "https://tutorials2.aspose.com/page" --cleanDestinationDir --minify
     # - name: Deploy Page to S3
     #   run: hugo deploy --config "configs/page.toml" --maxDeletes=-1 --target "staging" --force
     #   env:

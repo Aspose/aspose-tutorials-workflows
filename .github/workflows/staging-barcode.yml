@@ -34,7 +34,7 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@v2
       with:
         find: "tutorials.aspose.com"
-        replace: "products-qa.aspose.com"
+        replace: "tutorials2.aspose.com"
         include: "_index.md"
     - name: Find and replace image url domain
       uses: jacobtomlinson/gha-find-replace@v2
@@ -43,7 +43,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build BarCode
-      run: hugo --config "configs/barcode.toml" -c "content/barcode" -b "https://products-qa.aspose.com/barcode" --cleanDestinationDir --minify
+      run: hugo --config "configs/barcode.toml" -c "content/barcode" -b "https://tutorials2.aspose.com/barcode" --cleanDestinationDir --minify
     - name: Deploy BarCode to S3
       run: hugo deploy --config "configs/barcode.toml" --maxDeletes=-1 --target "staging" --force
       env:

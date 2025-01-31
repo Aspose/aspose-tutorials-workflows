@@ -25,7 +25,7 @@ jobs:
     - name: Install postcss-cli
       run:  npm install -D --save postcss-cli
     - name: Build Medical
-      run: hugo --config "configs/medical.toml" -c "content/medical" -b "https://products-qa.aspose.com/medical" --cleanDestinationDir --minify
+      run: hugo --config "configs/medical.toml" -c "content/medical" -b "https://tutorials2.aspose.com/medical" --cleanDestinationDir --minify
     - name: Deploy Medical to S3
       run: hugo deploy --config "configs/medical.toml" --maxDeletes=-1 --target "staging" --force
       env:

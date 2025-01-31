@@ -26,9 +26,9 @@ jobs:
     - name: Find and replace url param in frontmatter
       run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/url:/url_ignore:/g {} +
     - name: Find and replace domain name
-      run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/tutorials.aspose.com/products-qa.aspose.com/g {} +
+      run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/tutorials.aspose.com/tutorials2.aspose.com/g {} +
     - name: Build Slides
-      run: hugo --config "configs/slides.toml" -c "content/slides" -b "https://products-qa.aspose.com/slides" --cleanDestinationDir --minify
+      run: hugo --config "configs/slides.toml" -c "content/slides" -b "https://tutorials2.aspose.com/slides" --cleanDestinationDir --minify
     - name: Deploy Slides to S3
       run: hugo deploy --config "configs/slides.toml" --maxDeletes=-1 --target "staging" --force
       env:

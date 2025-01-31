@@ -23,9 +23,9 @@ jobs:
     - name: Install postcss-cli
       run:  npm install -D --save postcss-cli
     - name: Find and replace domain name
-      run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/tutorials.aspose.com/products-qa.aspose.com/g {} +
+      run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/tutorials.aspose.com/tutorials2.aspose.com/g {} +
     - name: Build Total
-      run: hugo --config "configs/total.toml" -c "content/total" -b "https://products-qa.aspose.com/total" --cleanDestinationDir --minify --templateMetrics --templateMetricsHints
+      run: hugo --config "configs/total.toml" -c "content/total" -b "https://tutorials2.aspose.com/total" --cleanDestinationDir --minify --templateMetrics --templateMetricsHints
     - name: Deploy Total to S3
       run: hugo deploy --config "configs/total.toml" --maxDeletes=-1 --target "staging"
       env:

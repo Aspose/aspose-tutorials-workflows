@@ -61,7 +61,7 @@ jobs:
       - name: Display config.json
         run: cat /Users/runner/work/tutorials.aspose.com-workflows/tutorials.aspose.com-workflows/config.json
       - name: Build Total
-        run: hugo --config "configs/total.toml","config.json" -c "content/total" -b "https://products-qa.aspose.com/total" --cleanDestinationDir --minify
+        run: hugo --config "configs/total.toml","config.json" -c "content/total" -b "https://tutorials2.aspose.com/total" --cleanDestinationDir --minify
           --templateMetrics --templateMetricsHints --enableGitInfo
       - name: Prepare public folder
         run: |
