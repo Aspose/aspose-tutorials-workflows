@@ -38,8 +38,6 @@ jobs:
         include: "_index.md"
     - name: Build Home
       run: hugo --config "configs/home.toml" -c "content" -b "https://tutorials.aspose.com/" --cleanDestinationDir --minify --disableKinds 404
-    - name: Prepare public folder
-      run: mv /home/runner/work/tutorials.aspose.com-workflows/tutorials.aspose.com-workflows/home-ru.sitemap public/ru-sitemaps.xml;
     - name: Deploy Home to S3
       run: hugo deploy --config "configs/home.toml" --maxDeletes=0 --target "production" --force
       env:
