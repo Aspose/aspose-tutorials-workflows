@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout theme repo
       uses: actions/checkout@main
@@ -18,18 +18,36 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-          hugo-version: '0.101.0'
+          hugo-version: '0.135.0'
           extended: true
     - name: Install autoprefixer
       run:  npm install -D --save autoprefixer
     - name: Install postcss-cli
       run:  npm install -D --save postcss-cli
     - name: Find and replace url param in frontmatter
-      run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/url:/url_ignore:/g {} +
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "url:"
+        replace: "url_ignore:"
+        include: "_index.md"
+    - name: Find and replace image url domain
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "logoImageSrc=\"https://www.aspose.cloud/"
+        replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
+        include: "_index.md"
     - name: Build Cells
       run: hugo --config "configs/cells.toml" -c "content/cells" -b "https://tutorials.aspose.com/cells" --cleanDestinationDir --minify
     - name: Deploy Cells to S3
       run: hugo deploy --config "configs/cells.toml" --maxDeletes=-1 --target "production" --force
       env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+        PATHS: "/cells/*"
+        AWS_REGION: "us-west-2"
         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
