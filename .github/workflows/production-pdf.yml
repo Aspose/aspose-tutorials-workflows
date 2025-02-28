@@ -37,9 +37,9 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build PDF
-      run: hugo --config "./config-prod.toml" -c "content/pdf" -b "https://tutorials.aspose.com/pdf" --cleanDestinationDir --minify
+      run: hugo --config "configs/cells.toml" -c "content/pdf" -b "https://tutorials.aspose.com/pdf" --cleanDestinationDir --minify
     - name: Deploy PDF to S3
-      run: hugo deploy --config "./config-prod.toml" --maxDeletes=-1 --target "pdf" --force
+      run: hugo deploy --config "configs/cells.toml" --maxDeletes=-1 --target "pdf" --force
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
