@@ -39,7 +39,7 @@ jobs:
     - name: Build PDF
       run: hugo --config "configs/cells.toml" -c "content/pdf" -b "https://tutorials.aspose.com/pdf" --cleanDestinationDir --minify
     - name: Deploy PDF to S3
-      run: hugo deploy --config "configs/cells.toml" --maxDeletes=-1 --target "pdf" --force
+      run: hugo deploy --config "configs/cells.toml" --maxDeletes=-1 --target "production" --force
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
