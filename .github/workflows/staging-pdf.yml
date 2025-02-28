@@ -43,7 +43,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build PDF
-      run: hugo --config "./config.toml" -c "content/pdf" -b "https://tutorials2.aspose.com/pdf" --cleanDestinationDir --minify
+      run: hugo --config "configs/cells.toml" -c "content/pdf" -b "https://tutorials2.aspose.com/pdf" --cleanDestinationDir --minify
     - name: Deploy PDF to S3
       run: hugo deploy --config "configs/pdf.toml" --maxDeletes=-1 --target "pdf" --force
       env:
