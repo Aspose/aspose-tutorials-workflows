@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout theme repo
       uses: actions/checkout@main
@@ -18,20 +18,42 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-          hugo-version: '0.101.0'
+          hugo-version: '0.135.0'
           extended: true
     - name: Install autoprefixer
       run:  npm install -D --save autoprefixer
     - name: Install postcss-cli
       run:  npm install -D --save postcss-cli
     - name: Find and replace url param in frontmatter
-      run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/url:/url_ignore:/g {} +
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "url:"
+        replace: "url_ignore:"
+        include: "_index.md"
     - name: Find and replace domain name
-      run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/tutorials.aspose.com/tutorials2.aspose.com/g {} +
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "tutorials.aspose.com"
+        replace: "tutorials2.aspose.com"
+        include: "_index.md"
+    - name: Find and replace image url domain
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "logoImageSrc=\"https://www.aspose.cloud/"
+        replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
+        include: "_index.md"
     - name: Build Slides
       run: hugo --config "configs/slides.toml" -c "content/slides" -b "https://tutorials2.aspose.com/slides" --cleanDestinationDir --minify
     - name: Deploy Slides to S3
       run: hugo deploy --config "configs/slides.toml" --maxDeletes=-1 --target "staging" --force
       env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_STAGE }}
+        PATHS: "/slides/*"
+        AWS_REGION: "us-west-2"
         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
