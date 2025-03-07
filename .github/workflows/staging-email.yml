@@ -42,10 +42,18 @@ jobs:
         find: "logoImageSrc=\"https://www.aspose.cloud/"
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
-    - name: Build Email
+    - name: Build email
       run: hugo --config "configs/email.toml" -c "content/email" -b "https://tutorials2.aspose.com/email" --cleanDestinationDir --minify
-    - name: Deploy Email to S3
+    - name: Deploy email to S3
       run: hugo deploy --config "configs/email.toml" --maxDeletes=-1 --target "staging" --force
       env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_STAGE }}
+        PATHS: "/email/*"
+        AWS_REGION: "us-west-2"
         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}

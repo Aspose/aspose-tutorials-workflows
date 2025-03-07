@@ -1,4 +1,4 @@
-name: ZIP-Staging
+name: Zip-Staging
 
 on:
   repository_dispatch:
@@ -42,10 +42,18 @@ jobs:
         find: "logoImageSrc=\"https://www.aspose.cloud/"
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
-    - name: Build ZIP
+    - name: Build zip
       run: hugo --config "configs/zip.toml" -c "content/zip" -b "https://tutorials2.aspose.com/zip" --cleanDestinationDir --minify
-    # - name: Deploy ZIP to S3
-    #   run: hugo deploy --config "configs/zip.toml" --maxDeletes=-1 --target "staging" --force
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Deploy zip to S3
+      run: hugo deploy --config "configs/zip.toml" --maxDeletes=-1 --target "staging" --force
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_STAGE }}
+        PATHS: "/zip/*"
+        AWS_REGION: "us-west-2"
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
