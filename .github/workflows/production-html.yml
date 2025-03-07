@@ -37,9 +37,17 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build HTML
-      run: hugo --config "./configs/html.toml" -c "content/html" -b "https://tutorials.aspose.com/html" --cleanDestinationDir --minify
-    # - name: Deploy HTML to S3
-      # run: hugo deploy --config "./configs/html.toml" --maxDeletes=-1 --target "production" --force  
-      # env:
-      #   AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-      #   AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+      run: hugo --config "configs/html.toml" -c "content/html" -b "https://tutorials.aspose.com/html" --cleanDestinationDir --minify
+    - name: Deploy HTML to S3
+      run: hugo deploy --config "configs/html.toml" --maxDeletes=-1 --target "production" --force
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+        PATHS: "/html/*"
+        AWS_REGION: "us-west-2"
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}

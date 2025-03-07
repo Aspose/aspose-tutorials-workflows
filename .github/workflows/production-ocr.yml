@@ -18,7 +18,7 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-          hugo-version: '0.110.0'
+          hugo-version: '0.135.0'
           extended: true
     - name: Install autoprefixer
       run:  npm install -D --save autoprefixer
@@ -41,5 +41,13 @@ jobs:
     - name: Deploy OCR to S3
       run: hugo deploy --config "configs/ocr.toml" --maxDeletes=-1 --target "production" --force
       env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+        PATHS: "/ocr/*"
+        AWS_REGION: "us-west-2"
         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}

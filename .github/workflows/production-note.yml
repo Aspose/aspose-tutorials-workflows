@@ -37,9 +37,17 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build Note
-      run: hugo --config "configs/note.toml" -b "https://tutorials.aspose.com/note" --cleanDestinationDir --minify
-    # - name: Deploy Note to S3
-    #   run: hugo deploy --config "configs/note.toml" --maxDeletes=-1 --target "production" --force
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+      run: hugo --config "configs/note.toml" -c "content/note" -b "https://tutorials.aspose.com/note" --cleanDestinationDir --minify
+    - name: Deploy Note to S3
+      run: hugo deploy --config "configs/note.toml" --maxDeletes=-1 --target "production" --force
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+        PATHS: "/note/*"
+        AWS_REGION: "us-west-2"
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}

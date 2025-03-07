@@ -37,9 +37,17 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build Tasks
-      run: hugo --config "configs/tasks.toml" -b "https://tutorials.aspose.com/tasks" --cleanDestinationDir --minify
-    # - name: Deploy Tasks to S3
-    #   run: hugo deploy --config "configs/tasks.toml" --maxDeletes=-1 --target "production" --force
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+      run: hugo --config "configs/tasks.toml" -c "content/tasks" -b "https://tutorials.aspose.com/tasks" --cleanDestinationDir --minify
+    - name: Deploy Tasks to S3
+      run: hugo deploy --config "configs/tasks.toml" --maxDeletes=-1 --target "production" --force
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+        PATHS: "/tasks/*"
+        AWS_REGION: "us-west-2"
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}

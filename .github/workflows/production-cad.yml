@@ -1,9 +1,6 @@
 name: CAD-Production
 
 on:
-  push:
-    branches:
-      - master
   repository_dispatch:
     types: [production-complete]
   workflow_dispatch:
@@ -21,7 +18,7 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-          hugo-version: '0.101.0'
+          hugo-version: '0.135.0'
           extended: true
     - name: Install autoprefixer
       run:  npm install -D --save autoprefixer
@@ -40,9 +37,17 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build CAD
-      run: hugo --config "configs/cad.toml" -b "https://tutorials.aspose.com/cad" --cleanDestinationDir --minify
+      run: hugo --config "configs/cad.toml" -c "content/cad" -b "https://tutorials.aspose.com/cad" --cleanDestinationDir --minify
     - name: Deploy CAD to S3
       run: hugo deploy --config "configs/cad.toml" --maxDeletes=-1 --target "production" --force
       env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+        PATHS: "/cad/*"
+        AWS_REGION: "us-west-2"
         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
