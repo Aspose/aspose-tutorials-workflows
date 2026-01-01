@@ -38,16 +38,21 @@ jobs:
         include: "_index.md"
     - name: Build 3D
       run: hugo --config "configs/3d.toml" -c "content/3d" -b "https://tutorials.aspose.com/3d" --cleanDestinationDir --minify
-    - name: Deploy 3D to S3
-      run: hugo deploy --config "configs/3d.toml" --maxDeletes=-1 --target "production" --force
+    - name: Sync to Ceph S3
+      run: |
+        aws s3 sync ./public/ s3://tutorials-aspose-com/3d/ \
+          --endpoint-url https://s3.dynabic.com \
+          --acl public-read \
+          --delete
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
-    - name: Invalidate CloudFront
-      uses: chetan/invalidate-cloudfront-action@v2
-      env:
-        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
-        PATHS: "/3d/*"
-        AWS_REGION: "us-west-2"
-        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.CEPH_S3_LIVE_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.CEPH_S3_LIVE_SECRET_KEY }}
+        AWS_DEFAULT_REGION: us-east-1
+        AWS_ENDPOINT_URL: https://s3-admin.dynabic.com
+
+    - name: Purge BunnyCDN Cache
+      run: |
+         curl -siG \
+          -H "X-Api-Key: ${{ secrets.BUNNY_API_KEY }}" \
+          --data-urlencode "url=https://tutorials.conholdate.com/3d" \
+          "https://api.dynabic.com/bn/purge?async=true"
