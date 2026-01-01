@@ -28,8 +28,21 @@ jobs:
       run: LC_ALL=C find . -type f -name '*.md' -exec sed -i '' s/url:/url_ignore:/g {} +
     - name: Build Diagram
       run: hugo --config "configs/diagram.toml" -c "content/diagram" -b "https://tutorials.aspose.com/diagram" --cleanDestinationDir --minify
-    - name: Deploy Diagram to S3
-      run: hugo deploy --config "configs/diagram.toml" --maxDeletes=-1 --target "production" --force
+    - name: Sync to Ceph S3
+      run: |
+        aws s3 sync ./public/ s3://tutorials-aspose-com/diagram/ \
+          --endpoint-url https://s3.dynabic.com \
+          --acl public-read \
+          --delete
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.CEPH_S3_LIVE_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.CEPH_S3_LIVE_SECRET_KEY }}
+        AWS_DEFAULT_REGION: us-east-1
+        AWS_ENDPOINT_URL: https://s3-admin.dynabic.com
+
+    - name: Purge BunnyCDN Cache
+      run: |
+         curl -siG \
+          -H "X-Api-Key: ${{ secrets.BUNNY_API_KEY }}" \
+          --data-urlencode "url=https://tutorials.conholdate.com/diagram" \
+          "https://api.dynabic.com/bn/purge?async=true"
