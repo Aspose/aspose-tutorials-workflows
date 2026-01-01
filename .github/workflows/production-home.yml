@@ -42,8 +42,7 @@ jobs:
       run: |
         aws s3 sync ./public/ s3://tutorials-aspose-com/ \
           --endpoint-url https://s3.dynabic.com \
-          --acl public-read \
-          --delete
+          --acl public-read
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.CEPH_S3_LIVE_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.CEPH_S3_LIVE_SECRET_KEY }}
