@@ -1,4 +1,4 @@
-name: TeX-Production
+name: TeX-Production BunnyNet
 
 on:
   repository_dispatch:

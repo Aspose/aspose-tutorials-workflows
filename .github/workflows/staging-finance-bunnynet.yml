@@ -1,4 +1,4 @@
-name: Finance-Staging
+name: Finance-Staging BunnyNet
 
 on:
   repository_dispatch:

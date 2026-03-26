@@ -1,4 +1,4 @@
-name: PUB-Production
+name: PUB-Production BunnyNet
 
 on:
   repository_dispatch:

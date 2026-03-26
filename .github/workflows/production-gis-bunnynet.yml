@@ -1,4 +1,4 @@
-name: GIS-Production
+name: GIS-Production BunnyNet
 
 on:
   repository_dispatch:

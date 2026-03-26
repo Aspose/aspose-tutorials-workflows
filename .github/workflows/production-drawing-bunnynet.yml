@@ -1,4 +1,4 @@
-name: Drawing-Production
+name: Drawing-Production BunnyNet
 
 on:
   repository_dispatch:

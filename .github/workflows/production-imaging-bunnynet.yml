@@ -1,4 +1,4 @@
-name: Imaging-Production
+name: Imaging-Production BunnyNet
 
 on:
   repository_dispatch:

@@ -1,4 +1,4 @@
-name: Cells-Production
+name: Cells-Production BunnyNet
 
 on:
   repository_dispatch:

@@ -1,4 +1,4 @@
-name: Barcode-Staging
+name: Barcode-Staging BunnyNet
 
 on:
   repository_dispatch:

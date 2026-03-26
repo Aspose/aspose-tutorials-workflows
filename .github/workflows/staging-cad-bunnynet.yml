@@ -1,4 +1,4 @@
-name: CAD-Staging
+name: CAD-Staging BunnyNet
 
 on:
   repository_dispatch:

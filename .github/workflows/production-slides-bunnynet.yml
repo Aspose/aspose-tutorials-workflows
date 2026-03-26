@@ -1,4 +1,4 @@
-name: Slides-Production
+name: Slides-Production BunnyNet
 
 on:
   repository_dispatch:

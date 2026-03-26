@@ -1,4 +1,4 @@
-name: Diagram-Staging
+name: Diagram-Staging BunnyNet
 
 on:
   repository_dispatch:

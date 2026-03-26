@@ -1,4 +1,4 @@
-name: PDF-Staging
+name: PDF-Staging BunnyNet
 
 on:
   repository_dispatch:

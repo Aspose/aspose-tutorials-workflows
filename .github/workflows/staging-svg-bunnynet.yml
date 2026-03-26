@@ -1,4 +1,4 @@
-name: SVG-Staging
+name: SVG-Staging BunnyNet
 
 on:
   repository_dispatch:

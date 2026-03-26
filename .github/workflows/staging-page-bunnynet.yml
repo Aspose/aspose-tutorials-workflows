@@ -1,4 +1,4 @@
-name: Page-Staging
+name: Page-Staging BunnyNet
 
 on:
   repository_dispatch:

@@ -1,4 +1,4 @@
-name: Drawing-Staging
+name: Drawing-Staging BunnyNet
 
 on:
   repository_dispatch:

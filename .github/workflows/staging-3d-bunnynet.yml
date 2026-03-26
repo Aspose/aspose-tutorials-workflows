@@ -1,4 +1,4 @@
-name: 3D-Staging
+name: 3D-Staging BunnyNet
 
 on:
   repository_dispatch:

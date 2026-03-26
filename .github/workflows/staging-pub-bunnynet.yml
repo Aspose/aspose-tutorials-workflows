@@ -1,4 +1,4 @@
-name: PUB-Staging
+name: PUB-Staging BunnyNet
 
 on:
   repository_dispatch:

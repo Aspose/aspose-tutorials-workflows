@@ -1,4 +1,4 @@
-name: medical-Staging
+name: medical-Staging BunnyNet
 
 on:
   repository_dispatch:

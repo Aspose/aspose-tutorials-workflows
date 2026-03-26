@@ -1,4 +1,4 @@
-name: TeX-Staging
+name: TeX-Staging BunnyNet
 
 on:
   repository_dispatch:

@@ -1,4 +1,4 @@
-name: Tasks-Production
+name: Tasks-Production BunnyNet
 
 on:
   repository_dispatch:

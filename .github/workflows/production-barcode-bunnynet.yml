@@ -1,4 +1,4 @@
-name: BarCode-Production
+name: BarCode-Production BunnyNet
 
 on:
   repository_dispatch:

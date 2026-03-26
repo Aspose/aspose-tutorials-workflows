@@ -1,4 +1,4 @@
-name: 3D-Production
+name: 3D-Production BunnyNet
 
 on:
   repository_dispatch:

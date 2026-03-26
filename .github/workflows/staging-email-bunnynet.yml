@@ -1,4 +1,4 @@
-name: Email-Staging
+name: Email-Staging BunnyNet
 
 on:
   repository_dispatch:

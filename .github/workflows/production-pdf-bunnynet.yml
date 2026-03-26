@@ -1,4 +1,4 @@
-name: PDF-Production
+name: PDF-Production BunnyNet
 
 on:
   repository_dispatch:

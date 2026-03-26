@@ -1,4 +1,4 @@
-name: Font-Staging
+name: Font-Staging BunnyNet
 
 on:
   repository_dispatch:

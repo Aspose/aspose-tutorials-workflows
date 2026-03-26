@@ -1,4 +1,4 @@
-name: PSD-Production
+name: PSD-Production BunnyNet
 
 on:
   repository_dispatch:

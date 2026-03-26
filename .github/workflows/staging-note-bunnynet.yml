@@ -1,4 +1,4 @@
-name: Note-Staging
+name: Note-Staging BunnyNet
 
 on:
   repository_dispatch:

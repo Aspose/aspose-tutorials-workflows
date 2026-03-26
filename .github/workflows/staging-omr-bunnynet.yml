@@ -1,4 +1,4 @@
-name: OMR-Staging
+name: OMR-Staging BunnyNet
 
 on:
   repository_dispatch:

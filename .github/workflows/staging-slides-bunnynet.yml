@@ -1,4 +1,4 @@
-name: Slides-Staging
+name: Slides-Staging BunnyNet
 
 on:
   repository_dispatch:

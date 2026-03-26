@@ -1,4 +1,4 @@
-name: Font-Production
+name: Font-Production BunnyNet
 
 on:
   repository_dispatch:

@@ -1,4 +1,4 @@
-name: Finance-Production
+name: Finance-Production BunnyNet
 
 on:
   repository_dispatch:

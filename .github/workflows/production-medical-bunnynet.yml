@@ -1,4 +1,4 @@
-name: Medical-Production
+name: Medical-Production BunnyNet
 
 on:
   repository_dispatch:

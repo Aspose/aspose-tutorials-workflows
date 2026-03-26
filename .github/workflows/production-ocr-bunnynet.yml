@@ -1,4 +1,4 @@
-name: OCR-Production
+name: OCR-Production BunnyNet
 
 on:
   repository_dispatch:

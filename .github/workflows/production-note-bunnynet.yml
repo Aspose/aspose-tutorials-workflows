@@ -1,4 +1,4 @@
-name: Note-Production
+name: Note-Production BunnyNet
 
 on:
   repository_dispatch:

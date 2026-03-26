@@ -1,4 +1,4 @@
-name: Tasks-Staging
+name: Tasks-Staging BunnyNet
 
 on:
   repository_dispatch:

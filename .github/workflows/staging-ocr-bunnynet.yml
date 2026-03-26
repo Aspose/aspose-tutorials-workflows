@@ -1,4 +1,4 @@
-name: OCR-Staging
+name: OCR-Staging BunnyNet
 
 on:
   repository_dispatch:

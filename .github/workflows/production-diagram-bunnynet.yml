@@ -1,4 +1,4 @@
-name: Diagram-Production
+name: Diagram-Production BunnyNet
 
 on:
   repository_dispatch:

@@ -1,4 +1,4 @@
-name: Home-Production
+name: Home-Production BunnyNet
 
 on:
   repository_dispatch:

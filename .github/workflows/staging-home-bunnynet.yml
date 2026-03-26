@@ -1,4 +1,4 @@
-name: Home-Staging
+name: Home-Staging BunnyNet
 
 on:
   repository_dispatch:

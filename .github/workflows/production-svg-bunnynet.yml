@@ -1,4 +1,4 @@
-name: SVG-Production
+name: SVG-Production BunnyNet
 
 on:
   repository_dispatch:

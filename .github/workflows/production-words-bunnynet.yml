@@ -1,4 +1,4 @@
-name: Words-Production
+name: Words-Production BunnyNet
 
 on:
   repository_dispatch:

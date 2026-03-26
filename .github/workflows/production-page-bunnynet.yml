@@ -1,4 +1,4 @@
-name: Page-Production
+name: Page-Production BunnyNet
 
 on:
   repository_dispatch:
