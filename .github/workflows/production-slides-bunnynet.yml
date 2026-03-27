@@ -2,7 +2,7 @@ name: Slides-Production BunnyNet
 
 on:
   repository_dispatch:
-    types: [production-complete]
+    types: [production-complete-bunnynet]
   workflow_dispatch:
 
 jobs:

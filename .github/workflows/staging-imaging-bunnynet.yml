@@ -2,7 +2,7 @@ name: Imaging-Staging BunnyNet
 
 on:
   repository_dispatch:
-    types: [staging-complete]
+    types: [staging-complete-bunnynet]
   workflow_dispatch:
 
 jobs:
