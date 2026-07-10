@@ -9,12 +9,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout theme repo
+    - name: Checkout site repo
       uses: actions/checkout@main
       with:
           repository: Aspose/tutorials.aspose.com
           token: ${{ secrets.REPO_TOKEN }}
-          fetch-depth: 0 
+          fetch-depth: 0
+    - name: Checkout theme repo
+      uses: actions/checkout@main
+      with:
+          repository: Aspose/tutorials-theme
+          token: ${{ secrets.REPO_TOKEN }}
+          fetch-depth: 0
+          path: themes/tutorials-theme
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
