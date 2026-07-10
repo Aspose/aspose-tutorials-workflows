@@ -42,5 +42,5 @@ jobs:
       run: |
          curl -siG \
           -H "X-Api-Key: ${{ secrets.BUNNY_API_KEY }}" \
-          --data-urlencode "url=https://tutorials.conholdate.com/diagram" \
+          --data-urlencode "url=https://tutorials.aspose.com/diagram" \
           "https://api.dynabic.com/bn/purge?async=true"
