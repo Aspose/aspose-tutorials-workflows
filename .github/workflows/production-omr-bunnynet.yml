@@ -19,6 +19,7 @@ jobs:
       uses: actions/checkout@main
       with:
           repository: Aspose/tutorials-theme
+          ref: optimized
           token: ${{ secrets.REPO_TOKEN }}
           fetch-depth: 0
           path: themes/tutorials-theme
@@ -44,7 +45,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build OMR
-      run: hugo --config "configs/omr.toml" -c "content/omr" -b "https://tutorials.aspose.com/omr" --cleanDestinationDir --minify
+      run: hugo --config "configs/omr.toml" -c "content/omr" --cleanDestinationDir --minify
     - name: Sync to Ceph S3
       run: |
         aws s3 sync ./public/ s3://tutorials-aspose-com/omr/ \

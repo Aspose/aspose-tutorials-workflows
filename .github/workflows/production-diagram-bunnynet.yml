@@ -19,6 +19,7 @@ jobs:
       uses: actions/checkout@main
       with:
           repository: Aspose/tutorials-theme
+          ref: optimized
           token: ${{ secrets.REPO_TOKEN }}
           fetch-depth: 0
           path: themes/tutorials-theme
@@ -32,7 +33,7 @@ jobs:
     - name: Install postcss-cli
       run:  npm install -D --save postcss-cli
     - name: Build Diagram
-      run: hugo --config "configs/diagram.toml" -c "content/diagram" -b "https://tutorials.aspose.com/diagram" --cleanDestinationDir --minify
+      run: hugo --config "configs/diagram.toml" -c "content/diagram" --cleanDestinationDir --minify
     - name: Sync to Ceph S3
       run: |
         aws s3 sync ./public/ s3://tutorials-aspose-com/diagram/ \
