@@ -51,7 +51,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build Words
-      run: hugo --config "configs/words.toml" -c "content/words" -b "https://tutorials2.aspose.com/words" --cleanDestinationDir --minify
+      run: hugo --config "configs/words.toml" -c "content/words" --cleanDestinationDir --minify
     - name: Sync to Ceph S3
       run: |
         aws s3 sync ./public/ s3://qa-tutorials-aspose-com/words/ \
