@@ -51,7 +51,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build Cells
-      run: hugo --config "configs/cells.toml" -c "content/cells" --cleanDestinationDir --minify
+      run: hugo --config "configs/cells.toml" -c "content/cells" --environment staging --cleanDestinationDir --minify
     - name: Sync to Ceph S3
       run: |
         aws s3 sync ./public/ s3://qa-tutorials-aspose-com/cells/ \

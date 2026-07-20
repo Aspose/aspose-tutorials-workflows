@@ -37,7 +37,7 @@ jobs:
         replace: "tutorials2.aspose.com"
         include: "_index.md"
     - name: Build Total
-      run: hugo --config "configs/total.toml" -c "content/total" --cleanDestinationDir --minify
+      run: hugo --config "configs/total.toml" -c "content/total" --environment staging --cleanDestinationDir --minify
     - name: Sync to Ceph S3
       run: |
         aws s3 sync ./public/ s3://qa-tutorials-aspose-com/total/ \

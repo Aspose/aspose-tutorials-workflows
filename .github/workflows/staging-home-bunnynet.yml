@@ -52,7 +52,7 @@ jobs:
         include: "_index.md"
 
     - name: Build Home
-      run: hugo --config "configs/home.toml" --cleanDestinationDir --minify
+      run: hugo --config "configs/home.toml" --environment staging --cleanDestinationDir --minify
 
     - name: Sync to Ceph S3
       run: |
