@@ -51,7 +51,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build page
-      run: hugo --config "configs/page.toml" -c "content/page" --environment staging --cleanDestinationDir --minify
+      run: hugo --config "configs/page.toml" -c "content/page" --environment staging -b "https://qa-tutorials.aspose.com/page/" --cleanDestinationDir --minify
     - name: Sync to Ceph S3
       run: |
         aws s3 sync ./public/ s3://qa-tutorials-aspose-com/page/ \

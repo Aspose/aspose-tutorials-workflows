@@ -51,7 +51,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build 3D
-      run: hugo --config "configs/3d.toml" -c "content/3d" --environment staging --cleanDestinationDir --minify
+      run: hugo --config "configs/3d.toml" -c "content/3d" --environment staging -b "https://qa-tutorials.aspose.com/3d/" --cleanDestinationDir --minify
     - name: Sync to Ceph S3
       run: |
         aws s3 sync ./public/ s3://qa-tutorials-aspose-com/3d/ \

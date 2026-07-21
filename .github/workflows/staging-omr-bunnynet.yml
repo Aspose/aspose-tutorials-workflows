@@ -51,7 +51,7 @@ jobs:
         replace: "logoImageSrc=\"https://cms.admin.containerize.com/"
         include: "_index.md"
     - name: Build omr
-      run: hugo --config "configs/omr.toml" -c "content/omr" --environment staging --cleanDestinationDir --minify
+      run: hugo --config "configs/omr.toml" -c "content/omr" --environment staging -b "https://qa-tutorials.aspose.com/omr/" --cleanDestinationDir --minify
     - name: Sync to Ceph S3
       run: |
         aws s3 sync ./public/ s3://qa-tutorials-aspose-com/omr/ \
