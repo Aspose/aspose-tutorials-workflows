@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@main
       with:
           repository: Aspose/tutorials-theme
-          ref: redesign
+          ref: beta
           token: ${{ secrets.REPO_TOKEN }}
           fetch-depth: 0
           path: themes/tutorials-theme
