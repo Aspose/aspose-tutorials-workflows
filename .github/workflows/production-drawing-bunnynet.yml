@@ -1,3 +1,14 @@
+# DEPRECATED (2026-10-09): this product has fully cut over to the
+# push-triggered deploy-product.yml pipeline, which now lives in the
+# product's own repo and builds/deploys directly with no replication
+# into this shared site repo. The legacy per-repo copycat-action
+# workflow has been removed from the product repo, so this file is no
+# longer reachable by any real trigger. Kept only as a rollback
+# reference during the soak period - do not re-enable or invoke
+# manually without reinstating the copycat step in the product repo
+# first, since tutorials.aspose.com/content/<product>/ is no longer
+# being kept in sync.
+
 name: Drawing-Production BunnyNet
 
 on:

@@ -1,3 +1,11 @@
+# NOTE (2026-10-09): 20 of the products this fans out to have cut over
+# to their own push-triggered deploy-product.yml pipeline and no longer
+# feed tutorials.aspose.com/content/<product>/. Running this workflow
+# will rebuild those 20 from an increasingly stale content snapshot and
+# will NOT reflect their current state. Only still needed for the
+# remaining non-migrated products (diagram, finance, font, omr, pub).
+# See project_tutorials_deploy_pipeline_rollout memory for details.
+
 name: 02-Production-Complete BunnyNet
 
 on:
